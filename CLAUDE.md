@@ -22,26 +22,26 @@
 | **지호** | 해외사업 (Shopee) | Gemini Pro | `~/.openclaw/ws-jiho` |
 
 ### 광고 운영 (신규)
-| 이름 | 역할 | 모델 | 워크스페이스 |
-|---|---|---|---|
-| **나린** | 네이버 광고 옵티마이저 | Claude Opus / GPT-4o | `~/.openclaw/ws-narin` |
+| 이름 | 역할 | 모델 | 텔레그램 | 워크스페이스 |
+|---|---|---|---|---|
+| **수영 (Suyeong)** | 네이버 광고 옵티마이저 | Claude Opus 4.7 | `@suyoeng_bot` | `~/.openclaw/ws-suyeong` |
 
 ### 사장님 개인 비서 (신규)
-| 이름 | 역할 | 모델 | 워크스페이스 |
-|---|---|---|---|
-| **세아** | 개인 비서 (일정/할일/아이디어 평가) | Claude Sonnet | `~/.openclaw/ws-seah` |
+| 이름 | 역할 | 모델 | 텔레그램 | 워크스페이스 |
+|---|---|---|---|---|
+| **세아 (Sea-ah)** | 개인 비서 (일정/할일/아이디어 평가) | Claude Sonnet | (미생성) | `~/.openclaw/ws-seah` |
 
 ## 폴더 구조
 ```
 11.AGENT/
 ├── CLAUDE.md                  ← 이 파일 (전체 인덱스)
-├── README.md                  ← 프로젝트 소개
-├── abibi-setup.sh             ← 5인방 셋업 스크립트
-├── narin-seah-setup.sh        ← 나린·세아 셋업 스크립트 (신규)
+├── README.md
+├── abibi-setup.sh             ← 5인방 셋업 (참고용)
+├── suyeong-seah-setup.sh      ← 수영·세아 셋업 (참고용)
 └── agents/
-    ├── narin/
-    │   ├── CLAUDE.md          ← 나린 정체성/규칙
-    │   ├── SOUL.md            ← 워크스페이스에 들어갈 SOUL
+    ├── suyeong/
+    │   ├── CLAUDE.md
+    │   ├── SOUL.md
     │   └── README.md
     └── seah/
         ├── CLAUDE.md
@@ -54,12 +54,15 @@
 - 각 에이전트마다 별도 텔레그램 봇 (BotFather로 토큰 발급)
 - 설정 파일: `~/.openclaw/openclaw.json`
 
+## ⚠️ 셋업 스크립트 사용 시 주의
+`abibi-setup.sh` 와 `suyeong-seah-setup.sh` 는 `cat > openclaw.json` 으로 **통째로 덮어쓰는** 구조입니다. 이미 운영 중인 openclaw.json이 있으면 그대로 돌리지 마세요 — 게이트웨이 토큰, API 키 등이 날아갑니다. 대신 필요한 섹션(`agents.list`, `bindings`, `channels.telegram.accounts`)만 수동 머지하세요.
+
 ## 신규 에이전트 추가 절차
 1. `agents/{이름}/` 폴더에 CLAUDE.md, SOUL.md, README.md 작성
-2. 셋업 스크립트에 `~/.openclaw/ws-{이름}/SOUL.md` 생성 블록 추가
-3. `openclaw.json`의 `agents.list`, `bindings`, `channels.telegram.accounts`에 항목 추가
-4. 텔레그램 BotFather에서 `{이름}_bot` 생성 → 토큰 발급
+2. `~/.openclaw/ws-{이름}/SOUL.md` 생성
+3. `openclaw.json`의 `agents.list`, `bindings`, `channels.telegram.accounts`에 항목 머지
+4. 텔레그램 BotFather에서 봇 생성 → 토큰을 `accounts.{accountId}.botToken` 에 넣기
 5. 이 CLAUDE.md 표 업데이트
 
 ## 변경 이력
-- 2026-04-24: 나린·세아 두 에이전트 추가, 폴더 구조화, 루트 CLAUDE.md 신설
+- 2026-04-24: 수영(나린→개명) + 세아 추가, 폴더 구조화, 루트 CLAUDE.md 신설

@@ -1,16 +1,19 @@
 #!/bin/bash
 # ==========================================
-# 나린 + 세아 추가 셋업
+# 수영 + 세아 추가 셋업 (참고용)
 # (abibi-setup.sh 먼저 실행했다는 전제)
-# 서버 터미널에서 그대로 복붙하세요!
+#
+# ⚠️ 주의: 이 스크립트는 워크스페이스 + SOUL.md 만 만듭니다.
+#         openclaw.json은 직접 수정해야 합니다 (안내 출력 참고).
+#         이미 운영 중인 openclaw.json 덮어쓰면 게이트웨이/키가 날아갑니다.
 # ==========================================
 
-echo "🐱 나린(네이버광고) + 세아(개인비서) 셋업 시작!"
+echo "🐱 수영(네이버광고) + 세아(개인비서) 셋업 시작!"
 echo ""
 
 # 1) 워크스페이스 생성
 echo "📁 워크스페이스 생성 중..."
-mkdir -p ~/.openclaw/ws-narin
+mkdir -p ~/.openclaw/ws-suyeong
 mkdir -p ~/.openclaw/ws-seah/data/notes
 echo "  ✅ 완료"
 
@@ -21,15 +24,17 @@ echo "📊 세아 데이터 파일 초기화..."
 [ ! -f ~/.openclaw/ws-seah/data/ideas.json ]    && echo '[]' > ~/.openclaw/ws-seah/data/ideas.json
 echo "  ✅ 완료"
 
-# 3) SOUL.md - 나린 네이버광고 옵티마이저
+# 3) SOUL.md - 수영 네이버광고 옵티마이저
 echo "📝 SOUL.md 생성 중..."
 
-cat > ~/.openclaw/ws-narin/SOUL.md << 'SOUL_EOF'
-# 나린 - 네이버 광고 옵티마이저
+cat > ~/.openclaw/ws-suyeong/SOUL.md << 'SOUL_EOF'
+# 수영 - 네이버 광고 옵티마이저
 
 ## 정체성
-나는 아비비의고물상의 네이버 광고 운영자 나린입니다.
+나는 아비비의고물상의 네이버 광고 운영자 수영입니다.
 네이버 광고 데이터를 분석하고, 사장님 지시대로 광고비를 조절합니다.
+
+텔레그램 봇: @suyoeng_bot
 
 ## 회사 정보
 - 회사: 주식회사 다올에프엔에스
@@ -60,7 +65,7 @@ cat > ~/.openclaw/ws-narin/SOUL.md << 'SOUL_EOF'
 ## 말투
 정확하고 간결. 숫자/근거 우선. "변경 전 → 변경 후 → 예상 효과 → 리스크" 순서로 보고. 한국어로 대화.
 SOUL_EOF
-echo "  ✅ 나린"
+echo "  ✅ 수영"
 
 # 4) SOUL.md - 세아 개인비서
 cat > ~/.openclaw/ws-seah/SOUL.md << 'SOUL_EOF'
@@ -80,7 +85,7 @@ cat > ~/.openclaw/ws-seah/SOUL.md << 'SOUL_EOF'
 - **할 일**: 우선순위 매기기, 마감 알림, 주간 회고
 - **아이디어 평가**: 사장님 아이디어 받아 정리 → 분석 → 점수 → 액션 제안
 - **메모/회의록**: 정리, 액션 아이템 추출
-- **에이전트 조율**: 민지/하린/현우/도윤/지호/나린에게 위임 및 결과 종합
+- **에이전트 조율**: 민지/하린/현우/도윤/지호/수영에게 위임 및 결과 종합
 
 ## 절대 규칙
 - 사장님 개인 정보 외부 공유 금지
@@ -106,16 +111,16 @@ echo "==========================================="
 echo "📌 openclaw.json 수동 패치 필요!"
 echo "==========================================="
 echo ""
-echo "   nano ~/.openclaw/openclaw.json"
+echo "   nano ~/.openclaw/openclaw.json   (또는 메모장)"
 echo ""
 echo "▶ agents.list 배열에 추가:"
 cat << 'PATCH_EOF'
 
       {
-        "id": "narin",
-        "name": "나린 네이버광고옵티마이저",
+        "id": "suyeong",
+        "name": "수영 네이버광고옵티마이저",
         "model": "anthropic/claude-opus-4-7",
-        "workspace": "~/.openclaw/ws-narin"
+        "workspace": "~/.openclaw/ws-suyeong"
       },
       {
         "id": "seah",
@@ -128,15 +133,16 @@ echo ""
 echo "▶ bindings 배열에 추가:"
 cat << 'PATCH_EOF'
 
-    { "agentId": "narin", "match": { "channel": "telegram", "accountId": "narin_bot" } },
-    { "agentId": "seah",  "match": { "channel": "telegram", "accountId": "seah_bot"  } }
+    { "agentId": "suyeong", "match": { "channel": "telegram", "accountId": "suyeong_bot" } },
+    { "agentId": "seah",    "match": { "channel": "telegram", "accountId": "seah_bot"    } }
 PATCH_EOF
 echo ""
 echo "▶ channels.telegram.accounts 객체에 추가:"
 cat << 'PATCH_EOF'
 
-        "narin_bot": {
-          "botToken": "여기에_나린봇_토큰",
+        "suyeong_bot": {
+          "username": "suyoeng_bot",
+          "botToken": "여기에_수영봇_토큰",
           "dmPolicy": "pairing",
           "groupPolicy": "open",
           "streamMode": "partial"
@@ -149,9 +155,9 @@ cat << 'PATCH_EOF'
         }
 PATCH_EOF
 echo ""
-echo "📌 BotFather에서 봇 2개 추가 생성:"
-echo "   - @narin_bot (또는 원하는 이름)"
-echo "   - @seah_bot  (또는 원하는 이름)"
+echo "📌 BotFather에서 봇 생성 (없으면):"
+echo "   - 수영: @suyoeng_bot (이미 생성)"
+echo "   - 세아: @{원하는이름}_bot"
 echo "   토큰 받아서 위 자리에 붙여넣기"
 echo ""
 echo "📌 세아는 사장님 1:1 전용이므로 groupPolicy를 'closed'로 설정"
