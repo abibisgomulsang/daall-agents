@@ -124,6 +124,42 @@ async function getKeywordsByIds({ ids }) {
   return request({ method: 'GET', path: '/ncc/keywords', query });
 }
 
+// ---- 키워드 도구 ----
+// 키워드별 월간 검색수, 경쟁도, 평균 클릭률 등
+// hintKeywords: 조사할 키워드 목록 (콤마 구분, 최대 5개)
+// 옵션: showDetail=1 (성별/연령대/디바이스별 상세)
+async function keywordsTool({ hintKeywords, showDetail = 1, includeHintKeywords = 1 }) {
+  if (!hintKeywords?.length) throw new Error('keywordsTool: hintKeywords 필수');
+  const params = new URLSearchParams({
+    hintKeywords: hintKeywords.join(','),
+    showDetail: String(showDetail),
+    includeHintKeywords: String(includeHintKeywords),
+  });
+  return request({ method: 'GET', path: '/keywordstool', query: params.toString() });
+}
+
+// ---- 평균 노출 순위 추정 입찰가 ----
+// "원하는 평균 순위에 가려면 얼마 입찰해야 하는가" 추정
+// device: PC | MOBILE
+// position: 목표 순위 (1~15)
+// keywordplus: 확장검색 포함 여부
+async function estimateAveragePositionBid({ device, items, position }) {
+  if (!device || !items?.length || !position) {
+    throw new Error('estimateAveragePositionBid: device, items, position 필수');
+  }
+  const body = JSON.stringify({ device, items, position });
+  return request({ method: 'POST', path: '/estimate/average-position-bid/keyword', body });
+}
+
+// ---- 노출 가능 최저 입찰가 ----
+async function estimateExposureMinimumBid({ device, items }) {
+  if (!device || !items?.length) {
+    throw new Error('estimateExposureMinimumBid: device, items 필수');
+  }
+  const body = JSON.stringify({ device, items });
+  return request({ method: 'POST', path: '/estimate/exposure-minimum-bid/keyword', body });
+}
+
 module.exports = {
   listCampaigns,
   listAdGroups,
@@ -132,5 +168,8 @@ module.exports = {
   getStats,
   getBalance,
   listBusinessChannels,
+  keywordsTool,
+  estimateAveragePositionBid,
+  estimateExposureMinimumBid,
   // 변경 함수는 옵션 C라 의도적으로 노출 안 함. 추후 필요 시 별도 모듈로 분리.
 };
