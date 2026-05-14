@@ -1,0 +1,37 @@
+# 승인 필요: Claude/Gemini API 연결 실제 연결
+
+- 작업명: Claude/Gemini API 연결 실제 연결
+- 변경 대상: Claude/Gemini API 연결
+- 변경 전: 로컬 dry-run 연결 설계 상태
+- 변경 후: 승인 후 실제 연결 또는 호출 가능 상태
+- 예상 효과: AI 회사의 외부/로컬 에이전트 협업 준비
+- 위험 요소:
+- API 키/토큰 설정 오류
+- 실제 외부 호출 또는 메시지 발송 위험
+- 비용 발생 또는 외부 서비스 정책 위반 가능성
+- 되돌리는 방법: 연동 설정 비활성화, dry-run 모드 유지, 관련 토큰 폐기
+- 승인 필요 여부: 필요
+- 현재 실행 상태: dry-run 생성만 완료
+
+## 원본 초안
+
+# 4~8단계 AI 연결 작업 패키지
+
+- 실제 외부 API 호출 여부: 호출 안 함
+- 실제 텔레그램 발송 여부: 발송 안 함
+- API 키/토큰/쿠키 값 출력 여부: 출력 안 함
+- 목적: Ollama, Claude/Gemini, Telegram, Hermes, AgentAU/n8n 연결을 승인형 dry-run 구조로 준비
+
+| 단계 | 연결 | 상태 | 안전 확인 | 실제 연결 승인 | 다음 단계 |
+| ---: | --- | --- | --- | --- | --- |
+| 4 | Ollama 연결 | ready | ollama 명령: 없음, 로컬 11434 포트: 열림 | 조건부 불필요 | Ollama가 실행 중이면 모델 목록 조회 전 승인 상태를 확인한다. |
+| 5 | Claude/Gemini API 연결 | not_configured | Claude 계열 키 존재: 없음, Gemini 계열 키 존재: 없음 | 필요 | 키 존재 확인 후에도 실제 API 호출은 승인 파일 통과 후만 진행한다. |
+| 6 | 텔레그램 연결 | not_configured | bot token 존재: 없음, chat id 존재: 없음 | 필요 | 실제 발송 전 메시지 초안과 수신 대상을 사장님이 확인한다. |
+| 7 | Hermes AI 연결 | not_configured | HERMES_BASE_URL 존재: 없음, HERMES_API_KEY 존재: 없음 | 필요 | Hermes 엔드포인트 규격이 확정되면 읽기/쓰기 범위를 분리한다. |
+| 8 | AgentAU/n8n 오케스트레이션 연결 | not_configured | AgentAU URL 존재: 없음, n8n webhook/로컬 존재: 없음 | 필요 | n8n webhook payload와 AgentAU 업무 큐를 dry-run으로만 왕복 테스트한다. |
+
+## 실행 게이트
+
+- Claude/Gemini/Hermes/Telegram/n8n/AgentAU 실제 호출은 사장님 승인 전까지 금지
+- Ollama도 모델 다운로드나 장기 실행은 승인 파일 생성 후 진행
+- 연결 실패 시 기존 로컬 규칙 기반 AI 회사 기능으로 fallback

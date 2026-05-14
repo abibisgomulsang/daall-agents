@@ -1,0 +1,104 @@
+{
+  "actual_external_calls": false,
+  "key_values_exposed": false,
+  "stages": [
+    {
+      "stage": 4,
+      "name": "Ollama 연결",
+      "connector": "ollama",
+      "status": "ready",
+      "safe_detail": "ollama 명령: 없음, 로컬 11434 포트: 열림",
+      "dry_run_payload": {
+        "provider": "ollama",
+        "local_only": true,
+        "actual_model_call": false,
+        "model_download": false,
+        "endpoint": "http://127.0.0.1:11434",
+        "safe_prompt": "AI 회사 회의 요약 dry-run"
+      },
+      "approval_required_for_real": false,
+      "next_step": "Ollama가 실행 중이면 모델 목록 조회 전 승인 상태를 확인한다."
+    },
+    {
+      "stage": 5,
+      "name": "Claude/Gemini API 연결",
+      "connector": "claude_gemini",
+      "status": "not_configured",
+      "safe_detail": "Claude 계열 키 존재: 없음, Gemini 계열 키 존재: 없음",
+      "dry_run_payload": {
+        "providers": [
+          "claude",
+          "gemini"
+        ],
+        "actual_api_call": false,
+        "key_values_exposed": false,
+        "routing": {
+          "strategy": "Claude=전략/문서, Gemini=대량 아이디어/비교 검토",
+          "fallback": "로컬 규칙 기반 생성 또는 Ollama"
+        }
+      },
+      "approval_required_for_real": true,
+      "next_step": "키 존재 확인 후에도 실제 API 호출은 승인 파일 통과 후만 진행한다."
+    },
+    {
+      "stage": 6,
+      "name": "텔레그램 연결",
+      "connector": "telegram",
+      "status": "not_configured",
+      "safe_detail": "bot token 존재: 없음, chat id 존재: 없음",
+      "dry_run_payload": {
+        "provider": "telegram",
+        "actual_send": false,
+        "message_preview": "[dry-run] AI 회사 보고서가 생성되었습니다.",
+        "key_values_exposed": false
+      },
+      "approval_required_for_real": true,
+      "next_step": "실제 발송 전 메시지 초안과 수신 대상을 사장님이 확인한다."
+    },
+    {
+      "stage": 7,
+      "name": "Hermes AI 연결",
+      "connector": "hermes",
+      "status": "not_configured",
+      "safe_detail": "HERMES_BASE_URL 존재: 없음, HERMES_API_KEY 존재: 없음",
+      "dry_run_payload": {
+        "provider": "hermes",
+        "actual_api_call": false,
+        "role": "CEO 오케스트레이터 보조 또는 장기 메모리 에이전트",
+        "key_values_exposed": false
+      },
+      "approval_required_for_real": true,
+      "next_step": "Hermes 엔드포인트 규격이 확정되면 읽기/쓰기 범위를 분리한다."
+    },
+    {
+      "stage": 8,
+      "name": "AgentAU/n8n 오케스트레이션 연결",
+      "connector": "agentau_n8n",
+      "status": "not_configured",
+      "safe_detail": "AgentAU URL 존재: 없음, n8n webhook/로컬 존재: 없음",
+      "dry_run_payload": {
+        "providers": [
+          "agentau",
+          "n8n"
+        ],
+        "actual_webhook_call": false,
+        "actual_agent_command": false,
+        "workflow": [
+          "Codex",
+          "CEO Orchestrator",
+          "AI Meeting",
+          "Approval Gate",
+          "Dry-run Output"
+        ],
+        "forbidden_actions": [
+          "actual_upload",
+          "bid_change",
+          "payment",
+          "customer_message"
+        ]
+      },
+      "approval_required_for_real": true,
+      "next_step": "n8n webhook payload와 AgentAU 업무 큐를 dry-run으로만 왕복 테스트한다."
+    }
+  ]
+}

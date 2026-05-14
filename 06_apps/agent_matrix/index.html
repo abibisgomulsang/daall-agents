@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>AI 1인 기업 — 직원 에이전트 보기</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <span class="brand-label">CONNECT AI · 직원 에이전트 보기</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="ghost-btn" href="../virtual_office/index.html">🏢 가상 사무실</a>
+      <a class="ghost-btn" href="../ai_office_simulator/index.html">← 시뮬레이터</a>
+      <a class="ghost-btn" href="../dry_run_dashboard/index.html">대시보드</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-title">1인 기업</div>
+    <div class="hero-meta">
+      <span class="pill"><span class="pill-dot calendar"></span><span id="todayLabel">오늘</span></span>
+      <span class="pill"><span class="pill-dot chat"></span><span id="chatCount">0</span> 건 대화</span>
+      <span class="pill"><span class="pill-dot alarm"></span>매일 09:00</span>
+    </div>
+    <div class="hero-actions">
+      <button class="hero-btn" data-modal="systemDiag">시스템 진단</button>
+      <button class="hero-btn" data-modal="reportAuto">리포트 자동화</button>
+      <button class="hero-btn primary" data-modal="orchestrator">모델 오케스트레이션</button>
+      <button class="hero-btn icon" id="reloadAgents" title="새로고침">⟳</button>
+    </div>
+  </section>
+
+  <section class="matrix-card">
+    <div class="matrix-head">
+      <div class="matrix-title"><span class="title-icon">⬢</span> 에이전트 매트릭스</div>
+      <div class="matrix-online" id="onlineSummary">0 / 0 ONLINE</div>
+    </div>
+
+    <div class="filter-row" id="filterRow">
+      <button class="chip active" data-filter="all">전체 <span class="count" id="countAll">0</span></button>
+      <button class="chip" data-filter="active">활성 <span class="count" id="countActive">0</span></button>
+      <button class="chip" data-filter="offline">옵션 <span class="count" id="countOffline">0</span></button>
+      <button class="chip" data-filter="open">채용 대기 <span class="count" id="countOpen">0</span></button>
+    </div>
+
+    <div class="agent-grid" id="agentGrid"></div>
+  </section>
+
+  <footer class="footer-note">
+    실제 광고/스마트스토어/SNS 반영은 09_approval 승인 후에만 진행됩니다. 모든 상태는 dry-run 보고서 기반입니다.
+  </footer>
+</div>
+
+<!-- 시스템 진단 모달 -->
+<div class="modal" id="modal-systemDiag" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-body">
+    <button class="modal-close" data-close>×</button>
+    <h2>시스템 진단</h2>
+    <p class="sub">현재 PC 환경 자동 감지 결과. 실제 시스템 변경은 하지 않습니다.</p>
+    <div class="info-row" id="systemInfo"></div>
+    <h3>안전 규칙 요약</h3>
+    <ul class="muted-list">
+      <li>외부 API/결제/SNS 실제 실행은 09_approval 승인 후만</li>
+      <li>API 키/비밀번호/.env 노출 금지</li>
+      <li>D:\AI_COMPANY 밖 파일 수정 금지</li>
+      <li>위험 키워드(입찰가/광고비/업로드/결제 등) 자동 차단</li>
+    </ul>
+    <div class="modal-actions">
+      <button class="hero-btn" data-close>닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 리포트 자동화 모달 -->
+<div class="modal" id="modal-reportAuto" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-body">
+    <button class="modal-close" data-close>×</button>
+    <h2>리포트 자동화</h2>
+    <p class="sub">정해진 시각에 dry-run 보고서 자동 생성. 실제 외부 호출 없음.</p>
+    <table class="schedule-table">
+      <thead><tr><th>시간</th><th>작업</th><th>출력</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td>매일 09:00</td><td>활동 로그 평균 소요 시간 리포트</td><td>08_reports/activity_report_*</td><td><span class="badge ok">대기</span></td></tr>
+        <tr><td>매일 09:05</td><td>승인 파일 위험도 우선순위 큐</td><td>08_reports/approval_priority_queue_*</td><td><span class="badge ok">대기</span></td></tr>
+        <tr><td>매주 월 10:00</td><td>네이버광고 CSV 분석 (샘플)</td><td>05_naver_ads/* + 09_approval/*</td><td><span class="badge ok">대기</span></td></tr>
+        <tr><td>매월 1일 09:30</td><td>승인 파일 중복/오래된 요청 정리</td><td>08_reports/approval_cleanup_*</td><td><span class="badge ok">대기</span></td></tr>
+      </tbody>
+    </table>
+    <h3>예약 추가 (수동)</h3>
+    <p class="sub">Windows 작업 스케줄러에 등록해 사용하실 수 있습니다. 예시 명령:</p>
+    <pre><code>schtasks /Create /SC DAILY /ST 09:00 /TN "AI_COMPANY_activity_report" /TR "python -m ai_company.main activity-report"</code></pre>
+    <div class="modal-actions">
+      <button class="hero-btn" data-close>닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 모델 오케스트레이션 모달 -->
+<div class="modal" id="modal-orchestrator" hidden>
+  <div class="modal-body wide">
+    <button class="modal-close" data-close>×</button>
+    <h2>모델 오케스트레이션</h2>
+    <p class="sub">에이전트별 최적 LLM 자동 분배 · 추론 워크로드 분산</p>
+
+    <div class="machine-box">
+      💻 내 머신 자동 감지 · <span id="machineSpec">감지 중…</span><br>
+      안전 모델 한도 <b>~15GB</b> · 중형 모델(7~14B) 적합
+    </div>
+
+    <div class="live-status" id="liveStatus">
+      <span class="live-dot off" id="liveDot"></span>
+      <span id="liveText">Ollama 상태 확인 중…</span>
+    </div>
+
+    <div class="callout">
+      비워두면 기본 모델 사용. 작은 모델(3B)은 라우팅에, 큰 모델(32B+)은 분석/창작에 적합. 모델 전환 시 첫 호출이 2~5초 느려집니다.
+    </div>
+
+    <div class="warn-callout">
+      모델 4개 설치됨. 현재 매핑은 단일 모델만 사용 중. <b>자동 오케스트레이션</b> 버튼 누르면 역할별 분배.
+    </div>
+
+    <div class="map-list" id="modelMapList"></div>
+
+    <div class="modal-actions">
+      <button class="hero-btn" id="btnCatalog">로컬 LLM 카탈로그</button>
+      <button class="hero-btn" id="btnAutoMap">자동 오케스트레이션</button>
+      <button class="hero-btn primary" id="btnSaveMap">저장</button>
+      <button class="hero-btn" data-close>취소</button>
+    </div>
+
+    <div class="catalog" id="catalog" hidden>
+      <h3>로컬 LLM 카탈로그</h3>
+      <ul>
+        <li><b>llama3.1:8b</b> — 균형 · 회의/검토 적합</li>
+        <li><b>gemma2:9b</b> — 한국어 무난 · 광고 문구 초안</li>
+        <li><b>qwen2.5:7b</b> — 빠름 · 분류/태그 반복작업</li>
+        <li><b>phi3:mini</b> — 매우 빠름 · 라우팅 보조</li>
+        <li><b>mistral:7b</b> — 영문 강세 · 리서치 보조</li>
+      </ul>
+      <p class="sub">실제 다운로드/실행은 사장님 승인 후 ollama-model-list-dry-run으로 점검합니다.</p>
+    </div>
+  </div>
+</div>
+
+<script src="agents_data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

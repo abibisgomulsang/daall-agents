@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Company Dry-run Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="dashboard">
+    <header>
+      <div>
+        <p>ABIBI AI COMPANY</p>
+        <h1>Dry-run Dashboard</h1>
+      </div>
+      <nav class="app-nav" aria-label="로컬 앱 이동">
+        <a href="../ai_office_simulator/index.html">AI 사무실</a>
+        <a href="../cat_toy_recommender/index.html">추천 웹앱</a>
+      </nav>
+    </header>
+
+    <section class="metrics">
+      <article><strong id="reportCount">0</strong><span>보고서</span></article>
+      <article><strong id="approvalCount">0</strong><span>승인 요청</span></article>
+      <article><strong id="highRiskCount">0</strong><span>높은 위험</span></article>
+      <article><strong id="meetingCount">0</strong><span>회의 기록</span></article>
+      <article><strong id="schemaCount">0</strong><span>스키마</span></article>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>승인 상태</h2>
+        <div id="approvalBars" class="bars"></div>
+      </div>
+      <div class="panel">
+        <h2>위험도 요약</h2>
+        <div id="riskBars" class="bars"></div>
+      </div>
+      <div class="panel">
+        <h2>승인 파일 상세</h2>
+        <div id="approvalDetailList" class="approval-detail-list"></div>
+        <div id="approvalDetail" class="approval-detail"></div>
+      </div>
+      <div class="panel">
+        <h2>실행 검토 큐</h2>
+        <div id="priorityQueueList" class="priority-queue-list"></div>
+      </div>
+      <div class="panel">
+        <h2>채널별 Dry-run</h2>
+        <div id="dryRunList" class="list"></div>
+      </div>
+      <div class="panel wide">
+        <h2>실행 전 자료</h2>
+        <div id="executionArtifactList" class="list"></div>
+      </div>
+      <div class="panel wide">
+        <h2>앱 상태</h2>
+        <div id="appList" class="list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="dashboard_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

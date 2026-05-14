@@ -1,0 +1,129 @@
+{
+  "source_csv": "D:\\AI_COMPANY\\data\\products.csv",
+  "actual_login": false,
+  "actual_api_call": false,
+  "mutation_allowed": false,
+  "local_headers": [
+    "product_code",
+    "product_name",
+    "price",
+    "cost",
+    "main_feature",
+    "target_cat",
+    "tags"
+  ],
+  "target_fields": [
+    {
+      "name": "originProductNo",
+      "required": false,
+      "write_risk": "high",
+      "note": "스마트스토어 원상품 번호"
+    },
+    {
+      "name": "channelProductNo",
+      "required": false,
+      "write_risk": "high",
+      "note": "채널 상품 번호"
+    },
+    {
+      "name": "name",
+      "required": true,
+      "write_risk": "high",
+      "note": "상품명"
+    },
+    {
+      "name": "salePrice",
+      "required": true,
+      "write_risk": "critical",
+      "note": "판매가"
+    },
+    {
+      "name": "stockQuantity",
+      "required": false,
+      "write_risk": "critical",
+      "note": "재고 수량"
+    },
+    {
+      "name": "saleStatus",
+      "required": false,
+      "write_risk": "high",
+      "note": "판매 상태"
+    },
+    {
+      "name": "detailContent",
+      "required": false,
+      "write_risk": "high",
+      "note": "상세페이지 HTML"
+    },
+    {
+      "name": "representativeImage",
+      "required": false,
+      "write_risk": "high",
+      "note": "대표 이미지"
+    },
+    {
+      "name": "categoryId",
+      "required": false,
+      "write_risk": "medium",
+      "note": "카테고리"
+    },
+    {
+      "name": "customProductCode",
+      "required": true,
+      "write_risk": "low",
+      "note": "내부 상품 코드"
+    },
+    {
+      "name": "searchTags",
+      "required": false,
+      "write_risk": "medium",
+      "note": "검색 태그"
+    }
+  ],
+  "field_mapping": [
+    {
+      "local": "product_code",
+      "target": "customProductCode",
+      "transform": "string 그대로",
+      "mode": "read"
+    },
+    {
+      "local": "product_name",
+      "target": "name",
+      "transform": "공백 정리 후 문자열",
+      "mode": "read_then_approval_required_write"
+    },
+    {
+      "local": "price",
+      "target": "salePrice",
+      "transform": "정수 원화",
+      "mode": "read_then_approval_required_write"
+    },
+    {
+      "local": "tags",
+      "target": "searchTags",
+      "transform": "'|'를 배열로 분리",
+      "mode": "read_then_approval_required_write"
+    },
+    {
+      "local": "main_feature",
+      "target": "detailContent",
+      "transform": "상세페이지 초안 입력값",
+      "mode": "draft_only"
+    }
+  ],
+  "missing_local_fields": [],
+  "unmapped_local_fields": [
+    "cost",
+    "target_cat"
+  ],
+  "unmapped_required_targets": [],
+  "blocked_write_fields": [
+    "name",
+    "salePrice",
+    "stockQuantity",
+    "saleStatus",
+    "detailContent",
+    "representativeImage"
+  ]
+}

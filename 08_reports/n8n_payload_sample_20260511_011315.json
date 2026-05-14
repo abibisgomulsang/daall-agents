@@ -1,0 +1,16 @@
+{
+  "source": "ai_company_dry_run",
+  "dry_run": true,
+  "task": "고스틱 광고 효율 개선 회의 후 승인 파일 생성",
+  "requested_outputs": [
+    "08_reports",
+    "09_approval"
+  ],
+  "approval_required": true,
+  "forbidden_actions": [
+    "actual_upload",
+    "ad_bid_change",
+    "payment",
+    "customer_message"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "source": "smartstore_dry_run",
+  "dry_run": true,
+  "actual_login": false,
+  "actual_api_call": false,
+  "products": [
+    {
+      "product_code": "GOSTICK01",
+      "product_name": "고스틱",
+      "price": 12000,
+      "stock": null,
+      "status": "unknown"
+    },
+    {
+      "product_code": "PLAGO01",
+      "product_name": "플라고스틱",
+      "price": 7000,
+      "stock": null,
+      "status": "unknown"
+    },
+    {
+      "product_code": "REFILL01",
+      "product_name": "고스틱 리필",
+      "price": 2900,
+      "stock": null,
+      "status": "unknown"
+    }
+  ],
+  "blocked_actions": [
+    "login",
+    "product_update",
+    "price_update",
+    "stock_update"
+  ]
+}

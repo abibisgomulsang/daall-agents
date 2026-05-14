@@ -1,0 +1,43 @@
+{
+  "task": "고스틱 광고 릴스 썸네일 시안 만들어줘",
+  "primary": {
+    "key": "image_ai",
+    "display_name": "이미지 AI (Stable Diffusion / Canva / PIL)",
+    "role": "광고 이미지, 썸네일, 시각 자산",
+    "score": 8,
+    "reasons": [
+      "키워드 일치: '썸네일' (+3)",
+      "키워드 일치: '썸' (+3)",
+      "강점 토큰 일치: '광고 이미지 기획' (+1)",
+      "강점 토큰 일치: '썸네일 구성안' (+1)"
+    ]
+  },
+  "runners_up": [
+    {
+      "key": "gemini",
+      "display_name": "Gemini",
+      "score": 1
+    },
+    {
+      "key": "ollama",
+      "display_name": "Ollama (로컬)",
+      "score": 1
+    }
+  ],
+  "handoff": {
+    "router_version": "1.0.0",
+    "task": "고스틱 광고 릴스 썸네일 시안 만들어줘",
+    "primary_model": "image_ai",
+    "primary_display_name": "이미지 AI (Stable Diffusion / Canva / PIL)",
+    "role": "광고 이미지, 썸네일, 시각 자산",
+    "runners_up": [
+      "gemini",
+      "ollama"
+    ],
+    "dry_run": true,
+    "executed": false,
+    "next_stage": "ai_meeting",
+    "approval_required_for_external": true
+  },
+  "created_at": "2026-05-10 18:16:39"
+}

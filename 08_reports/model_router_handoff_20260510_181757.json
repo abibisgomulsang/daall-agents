@@ -1,0 +1,28 @@
+{
+  "task": "트렌드 리서치",
+  "primary": {
+    "key": "gemini",
+    "display_name": "Gemini",
+    "role": "리서치, 트렌드 조사, 아이디어 확장",
+    "score": 7,
+    "reasons": [
+      "키워드 일치: '리서치' (+3)",
+      "키워드 일치: '트렌드' (+3)",
+      "강점 토큰 일치: '트렌드 조사' (+1)"
+    ]
+  },
+  "runners_up": [],
+  "handoff": {
+    "router_version": "1.0.0",
+    "task": "트렌드 리서치",
+    "primary_model": "gemini",
+    "primary_display_name": "Gemini",
+    "role": "리서치, 트렌드 조사, 아이디어 확장",
+    "runners_up": [],
+    "dry_run": true,
+    "executed": false,
+    "next_stage": "ai_meeting",
+    "approval_required_for_external": true
+  },
+  "created_at": "2026-05-10 18:17:57"
+}

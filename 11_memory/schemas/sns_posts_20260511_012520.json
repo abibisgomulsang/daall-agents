@@ -1,0 +1,35 @@
+{
+  "description": "SNS 게시물 dry-run 스키마",
+  "fields": [
+    {
+      "name": "channel",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "caption",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "hashtags",
+      "type": "array[string]",
+      "required": false
+    },
+    {
+      "name": "asset_path",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "scheduled_at",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "blocked_actions": [
+    "실제 업로드",
+    "게시",
+    "DM/댓글 발송"
+  ]
+}

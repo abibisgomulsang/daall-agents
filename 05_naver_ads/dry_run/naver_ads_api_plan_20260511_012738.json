@@ -1,0 +1,25 @@
+{
+  "source": "naver_ads_api_dry_run",
+  "dry_run": true,
+  "actual_api_call": false,
+  "mutation_allowed": false,
+  "endpoints": [
+    {
+      "name": "keyword_report",
+      "method": "GET",
+      "writes": false
+    },
+    {
+      "name": "bid_update",
+      "method": "PUT",
+      "writes": true,
+      "blocked": true
+    },
+    {
+      "name": "budget_update",
+      "method": "PUT",
+      "writes": true,
+      "blocked": true
+    }
+  ]
+}

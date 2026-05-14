@@ -1,0 +1,30 @@
+{
+  "stage": 8,
+  "name": "AgentAU/n8n 오케스트레이션 연결",
+  "connector": "agentau_n8n",
+  "status": "not_configured",
+  "safe_detail": "AgentAU URL 존재: 없음, n8n webhook/로컬 존재: 없음",
+  "dry_run_payload": {
+    "providers": [
+      "agentau",
+      "n8n"
+    ],
+    "actual_webhook_call": false,
+    "actual_agent_command": false,
+    "workflow": [
+      "Codex",
+      "CEO Orchestrator",
+      "AI Meeting",
+      "Approval Gate",
+      "Dry-run Output"
+    ],
+    "forbidden_actions": [
+      "actual_upload",
+      "bid_change",
+      "payment",
+      "customer_message"
+    ]
+  },
+  "approval_required_for_real": true,
+  "next_step": "n8n webhook payload와 AgentAU 업무 큐를 dry-run으로만 왕복 테스트한다."
+}

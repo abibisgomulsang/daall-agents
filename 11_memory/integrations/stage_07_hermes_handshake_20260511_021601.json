@@ -1,0 +1,15 @@
+{
+  "stage": 7,
+  "name": "Hermes AI 연결",
+  "connector": "hermes",
+  "status": "not_configured",
+  "safe_detail": "HERMES_BASE_URL 존재: 없음, HERMES_API_KEY 존재: 없음",
+  "dry_run_payload": {
+    "provider": "hermes",
+    "actual_api_call": false,
+    "role": "CEO 오케스트레이터 보조 또는 장기 메모리 에이전트",
+    "key_values_exposed": false
+  },
+  "approval_required_for_real": true,
+  "next_step": "Hermes 엔드포인트 규격이 확정되면 읽기/쓰기 범위를 분리한다."
+}

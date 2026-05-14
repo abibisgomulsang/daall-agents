@@ -1,0 +1,86 @@
+{
+  "actual_api_call": false,
+  "mutation_allowed": false,
+  "read_endpoints_allowed_after_approval": [
+    "campaign_list",
+    "adgroup_list",
+    "keyword_report",
+    "cost_report"
+  ],
+  "write_endpoints_blocked": [
+    "keyword_bid_update",
+    "campaign_budget_update",
+    "keyword_pause"
+  ],
+  "endpoints": [
+    {
+      "name": "campaign_list",
+      "method": "GET",
+      "scope": "read_campaign",
+      "writes": false,
+      "mvp_allowed": true,
+      "approval_required": true,
+      "blocked_reason": ""
+    },
+    {
+      "name": "adgroup_list",
+      "method": "GET",
+      "scope": "read_adgroup",
+      "writes": false,
+      "mvp_allowed": true,
+      "approval_required": true,
+      "blocked_reason": ""
+    },
+    {
+      "name": "keyword_report",
+      "method": "GET",
+      "scope": "read_keyword_report",
+      "writes": false,
+      "mvp_allowed": true,
+      "approval_required": true,
+      "blocked_reason": ""
+    },
+    {
+      "name": "cost_report",
+      "method": "GET",
+      "scope": "read_cost_report",
+      "writes": false,
+      "mvp_allowed": true,
+      "approval_required": true,
+      "blocked_reason": ""
+    },
+    {
+      "name": "keyword_bid_update",
+      "method": "PUT",
+      "scope": "write_keyword_bid",
+      "writes": true,
+      "mvp_allowed": false,
+      "approval_required": true,
+      "blocked_reason": "입찰가 실제 변경 위험"
+    },
+    {
+      "name": "campaign_budget_update",
+      "method": "PUT",
+      "scope": "write_budget",
+      "writes": true,
+      "mvp_allowed": false,
+      "approval_required": true,
+      "blocked_reason": "광고비 실제 변경 위험"
+    },
+    {
+      "name": "keyword_pause",
+      "method": "PUT",
+      "scope": "write_keyword_status",
+      "writes": true,
+      "mvp_allowed": false,
+      "approval_required": true,
+      "blocked_reason": "키워드 노출 중지 위험"
+    }
+  ],
+  "safety_gates": [
+    "API 키/secret/customer id 출력 금지",
+    "읽기 API도 승인 파일 확인 후 진행",
+    "쓰기 API는 1차 MVP에서 전부 차단",
+    "입찰가/광고비/키워드 상태 변경은 사장님 최종 승인 필요"
+  ]
+}

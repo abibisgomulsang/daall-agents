@@ -1,0 +1,17 @@
+{
+  "source": "instagram_upload_dry_run",
+  "dry_run": true,
+  "actual_upload": false,
+  "product_code": "GOSTICK01",
+  "caption": "사줘도 안 놀던 고양이, 움직임을 바꿔보세요. #고양이장난감 #고스틱",
+  "assets_required": [
+    "feed_image_4_5",
+    "reels_cover_9_16"
+  ],
+  "preflight": [
+    "가격 확인",
+    "재고 확인",
+    "링크 확인",
+    "이미지 저작권 확인"
+  ]
+}

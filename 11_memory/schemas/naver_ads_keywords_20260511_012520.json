@@ -1,0 +1,50 @@
+{
+  "description": "네이버광고 키워드 데이터 dry-run 스키마",
+  "fields": [
+    {
+      "name": "campaign",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "ad_group",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "keyword",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "bid",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "cost",
+      "type": "integer",
+      "required": true
+    },
+    {
+      "name": "clicks",
+      "type": "integer",
+      "required": true
+    },
+    {
+      "name": "orders",
+      "type": "integer",
+      "required": true
+    },
+    {
+      "name": "revenue",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "blocked_actions": [
+    "입찰가 실제 변경",
+    "광고비 변경",
+    "키워드 중지"
+  ]
+}

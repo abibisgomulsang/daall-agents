@@ -1,0 +1,28 @@
+{
+  "task": "FastAPI 코드 자동화",
+  "primary": {
+    "key": "codex_chatgpt",
+    "display_name": "Codex / ChatGPT",
+    "role": "코딩, 시스템 구축, 전략",
+    "score": 7,
+    "reasons": [
+      "키워드 일치: '코드' (+3)",
+      "키워드 일치: '자동화' (+3)",
+      "강점 토큰 일치: '자동화 코드' (+1)"
+    ]
+  },
+  "runners_up": [],
+  "handoff": {
+    "router_version": "1.0.0",
+    "task": "FastAPI 코드 자동화",
+    "primary_model": "codex_chatgpt",
+    "primary_display_name": "Codex / ChatGPT",
+    "role": "코딩, 시스템 구축, 전략",
+    "runners_up": [],
+    "dry_run": true,
+    "executed": false,
+    "next_stage": "ai_meeting",
+    "approval_required_for_external": true
+  },
+  "created_at": "2026-05-10 18:17:56"
+}

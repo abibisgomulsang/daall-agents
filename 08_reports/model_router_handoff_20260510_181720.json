@@ -1,0 +1,36 @@
+{
+  "task": "스마트스토어 상세페이지 문구 검수",
+  "primary": {
+    "key": "claude",
+    "display_name": "Claude",
+    "role": "긴 문서, 고급 코딩, 기획서, 검토",
+    "score": 7,
+    "reasons": [
+      "키워드 일치: '검수' (+3)",
+      "키워드 일치: '상세페이지' (+3)",
+      "강점 토큰 일치: '스마트스토어 상세페이지 문구 검수' (+1)"
+    ]
+  },
+  "runners_up": [
+    {
+      "key": "image_ai",
+      "display_name": "이미지 AI (Stable Diffusion / Canva / PIL)",
+      "score": 1
+    }
+  ],
+  "handoff": {
+    "router_version": "1.0.0",
+    "task": "스마트스토어 상세페이지 문구 검수",
+    "primary_model": "claude",
+    "primary_display_name": "Claude",
+    "role": "긴 문서, 고급 코딩, 기획서, 검토",
+    "runners_up": [
+      "image_ai"
+    ],
+    "dry_run": true,
+    "executed": false,
+    "next_stage": "ai_meeting",
+    "approval_required_for_external": true
+  },
+  "created_at": "2026-05-10 18:17:20"
+}

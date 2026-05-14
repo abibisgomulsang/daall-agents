@@ -1,0 +1,21 @@
+{
+  "dry_run_only": true,
+  "actual_model_list_query": false,
+  "actual_model_call": false,
+  "model_download": false,
+  "external_network_call": false,
+  "command_available": false,
+  "local_port_11434_open": true,
+  "endpoint": "http://127.0.0.1:11434",
+  "planned_read_only_methods": [
+    "ollama list",
+    "GET http://127.0.0.1:11434/api/tags"
+  ],
+  "approval_required_before_query": true,
+  "forbidden_without_approval": [
+    "model_list_query",
+    "model_pull",
+    "model_run",
+    "long_running_generation"
+  ]
+}

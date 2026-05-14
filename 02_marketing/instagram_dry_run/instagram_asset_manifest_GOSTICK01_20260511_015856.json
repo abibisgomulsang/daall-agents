@@ -1,0 +1,37 @@
+{
+  "product_code": "GOSTICK01",
+  "actual_upload": false,
+  "actual_post": false,
+  "customer_message": false,
+  "required_assets": [
+    {
+      "slot": "feed_image_4_5",
+      "ratio": "4:5",
+      "required": true
+    },
+    {
+      "slot": "reels_cover_9_16",
+      "ratio": "9:16",
+      "required": true
+    },
+    {
+      "slot": "story_image_9_16",
+      "ratio": "9:16",
+      "required": false
+    }
+  ],
+  "existing_local_assets": [
+    "D:\\AI_COMPANY\\03_images\\share_cards\\share_card_GOSTICK01_20260511_013841.png",
+    "D:\\AI_COMPANY\\03_images\\share_cards\\share_card_GOSTICK01_20260511_013819.png"
+  ],
+  "missing_required_slots": [],
+  "caption_draft": "사줘도 안 놀던 고양이, 움직임을 바꿔보세요. #고양이장난감 #고스틱",
+  "preflight": [
+    "가격 확인",
+    "재고 확인",
+    "스마트스토어 링크 확인",
+    "이미지 저작권 확인",
+    "과장 표현 없음 확인",
+    "사장님 승인 파일 확인"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "stage": 4,
+  "name": "Ollama 연결",
+  "connector": "ollama",
+  "status": "ready",
+  "safe_detail": "ollama 명령: 없음, 로컬 11434 포트: 열림",
+  "dry_run_payload": {
+    "provider": "ollama",
+    "local_only": true,
+    "actual_model_call": false,
+    "model_download": false,
+    "endpoint": "http://127.0.0.1:11434",
+    "safe_prompt": "AI 회사 회의 요약 dry-run"
+  },
+  "approval_required_for_real": false,
+  "next_step": "Ollama가 실행 중이면 모델 목록 조회 전 승인 상태를 확인한다."
+}

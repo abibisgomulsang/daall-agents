@@ -1,0 +1,15 @@
+{
+  "stage": 6,
+  "name": "텔레그램 연결",
+  "connector": "telegram",
+  "status": "not_configured",
+  "safe_detail": "bot token 존재: 없음, chat id 존재: 없음",
+  "dry_run_payload": {
+    "provider": "telegram",
+    "actual_send": false,
+    "message_preview": "[dry-run] AI 회사 보고서가 생성되었습니다.",
+    "key_values_exposed": false
+  },
+  "approval_required_for_real": true,
+  "next_step": "실제 발송 전 메시지 초안과 수신 대상을 사장님이 확인한다."
+}

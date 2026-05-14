@@ -1,0 +1,21 @@
+{
+  "stage": 5,
+  "name": "Claude/Gemini API 연결",
+  "connector": "claude_gemini",
+  "status": "not_configured",
+  "safe_detail": "Claude 계열 키 존재: 없음, Gemini 계열 키 존재: 없음",
+  "dry_run_payload": {
+    "providers": [
+      "claude",
+      "gemini"
+    ],
+    "actual_api_call": false,
+    "key_values_exposed": false,
+    "routing": {
+      "strategy": "Claude=전략/문서, Gemini=대량 아이디어/비교 검토",
+      "fallback": "로컬 규칙 기반 생성 또는 Ollama"
+    }
+  },
+  "approval_required_for_real": true,
+  "next_step": "키 존재 확인 후에도 실제 API 호출은 승인 파일 통과 후만 진행한다."
+}

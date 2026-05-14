@@ -1,0 +1,30 @@
+{
+  "product_code": "GOSTICK01",
+  "product_name": "고스틱",
+  "versions": [
+    {
+      "name": "square_feed",
+      "ratio": "1:1",
+      "canvas": "1080x1080",
+      "main_copy": "고스틱, 사냥 놀이를 다시 켜는 시간",
+      "visual": "밝은 실내에서 고양이가 장난감을 바라보는 장면",
+      "safe_note": "효능, 치료, 100% 보장 표현 금지"
+    },
+    {
+      "name": "portrait_feed",
+      "ratio": "4:5",
+      "canvas": "1080x1350",
+      "main_copy": "사줘도 안 놀던 고양이, 움직임을 바꿔보세요",
+      "visual": "상단에 후킹 자막, 중앙에 놀이 장면, 하단에 상품 컷",
+      "safe_note": "가격/재고/배송 문구는 업로드 전 확인"
+    },
+    {
+      "name": "reels_cover",
+      "ratio": "9:16",
+      "canvas": "1080x1920",
+      "main_copy": "첫 2초에 멈추게 만드는 고양이 놀이",
+      "visual": "고양이가 점프하거나 집중하는 순간을 크게 배치",
+      "safe_note": "저작권 확인된 이미지 또는 직접 촬영 이미지 사용"
+    }
+  ]
+}

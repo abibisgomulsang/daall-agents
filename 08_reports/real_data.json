@@ -1,0 +1,39 @@
+{
+  "updated_at": "2026-05-13T17:05:00+09:00",
+  "source": "텔레그램 비서 수영 (실시간 데이터 연동)",
+  "is_sample": false,
+  "naver_ads": {
+    "roas": 1.2,
+    "ctr": 0.3,
+    "cpc": 1694,
+    "spend_today_krw": 28798,
+    "impressions_today": 5500,
+    "clicks_today": 17,
+    "conversions_today": 14,
+    "target_roas": 2.0,
+    "bizmoney_balance": 63609
+  },
+  "smartstore": {
+    "today_orders": 14,
+    "today_revenue_krw": 28299,
+    "recent_questions_unread": 0
+  },
+  "team_state": {
+    "boss_focus": "퇴근길 유입 선제적 대응 및 매출 목표 관리",
+    "today_priority": ["퇴근길 주문 유도", "가상 사무실 실시간 데이터 동기화", "마감 성과 예측"]
+  },
+  "alerts": [
+    {
+      "level": "success",
+      "title": "안정적인 유입 및 매출 상승",
+      "detail": "매출액이 2.8만원으로 상승하며 퇴근 전 주문이 기분 좋게 이어지고 있습니다. 🚀",
+      "owner": "수영"
+    },
+    {
+      "level": "info",
+      "title": "비즈머니 안정적 (6.3만원)",
+      "detail": "오늘 밤늦게까지 광고 노출에 전혀 지장 없습니다.",
+      "owner": "수영"
+    }
+  ]
+}

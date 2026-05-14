@@ -1,0 +1,41 @@
+{
+  "description": "스마트스토어 상품 데이터 dry-run 스키마",
+  "fields": [
+    {
+      "name": "product_code",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "product_name",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "price",
+      "type": "integer",
+      "required": true
+    },
+    {
+      "name": "stock",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "detail_page_url",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "blocked_actions": [
+    "상품명 실제 수정",
+    "가격 변경",
+    "재고 변경",
+    "상세페이지 저장"
+  ]
+}

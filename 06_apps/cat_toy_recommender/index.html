@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>고양이 장난감 추천 MVP</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <section class="quiz">
+      <div class="intro">
+        <p class="eyebrow">ABIBI AI COMPANY</p>
+        <h1>고양이 놀이 성향 추천</h1>
+      </div>
+
+      <form id="quizForm" class="questions">
+        <fieldset>
+          <legend>고양이가 가장 잘 반응하는 움직임</legend>
+          <label><input type="radio" name="style" value="chase" checked> 빠르게 도망가는 움직임</label>
+          <label><input type="radio" name="style" value="jump"> 위아래로 튀는 움직임</label>
+          <label><input type="radio" name="style" value="slow"> 천천히 숨었다 나오는 움직임</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>하루 활동량</legend>
+          <label><input type="radio" name="energy" value="high" checked> 매우 많음</label>
+          <label><input type="radio" name="energy" value="medium"> 보통</label>
+          <label><input type="radio" name="energy" value="low"> 낮음</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>장난감 구매 경험</legend>
+          <label><input type="radio" name="experience" value="new" checked> 처음 시작</label>
+          <label><input type="radio" name="experience" value="many"> 이미 여러 개 있음</label>
+          <label><input type="radio" name="experience" value="refill"> 리필이 필요함</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>고양이 성향</legend>
+          <label><input type="radio" name="personality" value="bold" checked> 호기심 많고 적극적</label>
+          <label><input type="radio" name="personality" value="careful"> 조심스럽게 관찰</label>
+          <label><input type="radio" name="personality" value="lazy"> 누워서 반응</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>좋아하는 놀이 시간</legend>
+          <label><input type="radio" name="playTime" value="long" checked> 10분 이상 길게</label>
+          <label><input type="radio" name="playTime" value="short"> 짧게 여러 번</label>
+          <label><input type="radio" name="playTime" value="night"> 밤에 갑자기 활발</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>놀이 공간</legend>
+          <label><input type="radio" name="space" value="wide" checked> 뛰어다닐 공간이 있음</label>
+          <label><input type="radio" name="space" value="small"> 작은 방이나 원룸</label>
+          <label><input type="radio" name="space" value="vertical"> 캣타워/소파 위주</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>소리나 낯선 물건 반응</legend>
+          <label><input type="radio" name="sensitivity" value="low" checked> 금방 다가옴</label>
+          <label><input type="radio" name="sensitivity" value="medium"> 조금 지켜봄</label>
+          <label><input type="radio" name="sensitivity" value="high"> 쉽게 놀람</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>현재 고민</legend>
+          <label><input type="radio" name="problem" value="bored" checked> 장난감에 금방 질림</label>
+          <label><input type="radio" name="problem" value="starter"> 어떤 장난감을 살지 모름</label>
+          <label><input type="radio" name="problem" value="replace"> 기존 장난감이 낡음</label>
+        </fieldset>
+
+        <button type="submit">추천 보기</button>
+      </form>
+    </section>
+
+    <section class="result" aria-live="polite">
+      <div class="result-card">
+        <p class="eyebrow">추천 결과</p>
+        <h2 id="resultName">고스틱</h2>
+        <p id="resultReason">활동량이 많고 추격 놀이에 잘 반응하는 고양이에게 어울립니다.</p>
+        <ul id="resultTips"></ul>
+      </div>
+
+      <div class="share-preview">
+        <div class="share-heading">
+          <p class="eyebrow">공유 이미지</p>
+          <div class="share-actions">
+            <button id="refreshShare" type="button">미리보기 갱신</button>
+            <a id="downloadShare" href="#" download="abibi-cat-play-result.png">PNG 저장</a>
+          </div>
+        </div>
+        <canvas id="shareCanvas" width="720" height="1280" aria-label="추천 결과 공유 이미지 미리보기"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

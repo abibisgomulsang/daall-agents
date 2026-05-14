@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Company Office Simulator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">D:\AI_COMPANY</p>
+      <h1>AI Company Office</h1>
+    </div>
+    <div class="status-strip" aria-label="AI 직원 요약">
+      <div class="metric active"><span id="activeCount">0</span><small>업무중</small></div>
+      <div class="metric review"><span id="reviewCount">0</span><small>검수</small></div>
+      <div class="metric idle"><span id="idleCount">0</span><small>대기</small></div>
+      <div class="metric blocked"><span id="blockedCount">0</span><small>막힘</small></div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="office-panel" aria-label="AI 직원 사무실">
+      <div class="controls">
+        <button id="toggleRun" type="button">일시정지</button>
+        <button id="focusTeam" type="button">전체 집중</button>
+        <label class="speed-control">
+          <span>속도</span>
+          <input id="speedRange" type="range" min="0.5" max="2.5" value="1" step="0.25">
+        </label>
+        <select id="scenarioSelect" aria-label="업무 시나리오">
+          <option value="mvp">MVP 점검</option>
+          <option value="ads">광고 분석</option>
+          <option value="content">콘텐츠 제작</option>
+          <option value="simulator">시뮬레이터 구축</option>
+        </select>
+      </div>
+
+      <div id="office" class="office" aria-live="polite">
+        <svg class="office-map" viewBox="0 0 1000 620" aria-hidden="true">
+          <defs>
+            <linearGradient id="wall" x1="0" x2="1">
+              <stop offset="0" stop-color="#f4f1e8"></stop>
+              <stop offset="1" stop-color="#e8f0ef"></stop>
+            </linearGradient>
+            <pattern id="floorGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#d8ddd7" stroke-width="1"></path>
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="1000" height="620" fill="url(#wall)"></rect>
+          <rect x="22" y="78" width="956" height="512" rx="18" fill="#fbfaf6"></rect>
+          <rect x="22" y="78" width="956" height="512" rx="18" fill="url(#floorGrid)" opacity="0.55"></rect>
+          <path d="M92 172 H908 M92 330 H908 M92 488 H908" stroke="#cfd8d1" stroke-width="8" stroke-linecap="round" opacity="0.72"></path>
+          <path d="M246 118 V548 M500 118 V548 M754 118 V548" stroke="#e1d7c6" stroke-width="6" stroke-linecap="round" opacity="0.62"></path>
+          <rect x="68" y="35" width="245" height="48" rx="8" fill="#154c5b"></rect>
+          <rect x="688" y="35" width="245" height="48" rx="8" fill="#704b33"></rect>
+          <rect x="376" y="28" width="248" height="58" rx="8" fill="#e9b44c"></rect>
+          <text x="190" y="65" fill="#ffffff" text-anchor="middle" font-size="20">회의실</text>
+          <text x="500" y="65" fill="#25231e" text-anchor="middle" font-size="20">검수 보드</text>
+          <text x="810" y="65" fill="#ffffff" text-anchor="middle" font-size="20">실행 대기</text>
+        </svg>
+
+        <div class="desk ceo" style="left: 9%; top: 21%;">CEO</div>
+        <div class="desk data" style="left: 34%; top: 21%;">Data</div>
+        <div class="desk marketing" style="left: 59%; top: 21%;">Marketing</div>
+        <div class="desk sns" style="left: 78%; top: 21%;">SNS</div>
+        <div class="desk image" style="left: 14%; top: 48%;">Image</div>
+        <div class="desk store" style="left: 39%; top: 48%;">Store</div>
+        <div class="desk ads" style="left: 64%; top: 48%;">Ads</div>
+        <div class="desk app" style="left: 78%; top: 48%;">App</div>
+        <div class="desk qa" style="left: 45%; top: 75%;">QA</div>
+      </div>
+    </section>
+
+    <aside class="side-panel" aria-label="AI 직원 상태판">
+      <section class="panel-section">
+        <div class="section-heading">
+          <h2>AI 직원 상태</h2>
+          <span id="clock">00:00:00</span>
+        </div>
+        <p id="feedState" class="feed-state">CLI 작업 로그 대기중</p>
+        <div id="agentList" class="agent-list"></div>
+      </section>
+
+      <section class="panel-section chat-panel">
+        <div class="section-heading">
+          <h2>AI 회사 채팅</h2>
+          <span id="chatStatus">대기</span>
+        </div>
+        <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+        <div class="chat-suggestions" aria-label="빠른 명령">
+          <button type="button" data-chat-prompt="고스틱 광고 회의해줘">회의</button>
+          <button type="button" data-chat-prompt="고스틱 광고 만들어줘">광고</button>
+          <button type="button" data-chat-prompt="네이버 광고 분석해줘">분석</button>
+          <button type="button" data-chat-prompt="대시보드 갱신해줘">대시보드</button>
+        </div>
+        <form id="chatForm" class="chat-form">
+          <input id="chatInput" type="text" autocomplete="off" placeholder="예: 고스틱 광고 회의해줘">
+          <button id="chatSubmit" type="submit">전송</button>
+        </form>
+      </section>
+
+      <section class="panel-section">
+        <h2>업무 큐</h2>
+        <ol id="taskQueue" class="task-queue"></ol>
+        <div class="queue-heading">
+          <h3>승인/위험도 큐</h3>
+          <span id="riskQueueSummary">대기중</span>
+        </div>
+        <div id="riskQueue" class="risk-queue"></div>
+      </section>
+
+      <section class="panel-section">
+        <h2>앱 상태</h2>
+        <div class="app-status-list">
+          <a class="app-status-item" href="../cat_toy_recommender/index.html">
+            <strong>고양이 장난감 추천</strong>
+            <span>8문항 MVP</span>
+            <em>로컬 실행 가능</em>
+          </a>
+          <a class="app-status-item" href="../dry_run_dashboard/index.html">
+            <strong>Dry-run 대시보드</strong>
+            <span>승인/보고서/채널 집계</span>
+            <em>연결됨</em>
+          </a>
+          <a class="app-status-item" href="index.html">
+            <strong>AI 사무실 시뮬레이터</strong>
+            <span>CLI 로그 연동</span>
+            <em>운영중</em>
+          </a>
+          <a class="app-status-item" href="../agent_matrix/index.html">
+            <strong>직원 에이전트 보기</strong>
+            <span>에이전트 매트릭스 · 모델 오케스트레이션</span>
+            <em>대시보드</em>
+          </a>
+          <a class="app-status-item" href="../virtual_office/index.html">
+            <strong>가상 사무실</strong>
+            <span>DAY/TIME · 자율 운영 · 활동/산출물/대화록</span>
+            <em>시뮬레이션</em>
+          </a>
+        </div>
+        <div class="connection-heading">
+          <h3>4~8단계 연결</h3>
+          <span id="connectionStageSummary">대기중</span>
+        </div>
+        <div id="connectionStageList" class="connection-stage-list"></div>
+      </section>
+
+      <section class="panel-section">
+        <h2>승인 상태</h2>
+        <div class="approval-metrics" aria-label="승인 상태 요약">
+          <div><strong id="approvalPending">0</strong><span>대기</span></div>
+          <div><strong id="approvalApproved">0</strong><span>승인</span></div>
+          <div><strong id="approvalRejected">0</strong><span>반려</span></div>
+        </div>
+        <div id="approvalList" class="approval-list"></div>
+      </section>
+
+      <section class="panel-section">
+        <h2>활동 로그</h2>
+        <div id="eventLog" class="event-log"></div>
+      </section>
+    </aside>
+  </main>
+
+  <script src="activity_feed.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
